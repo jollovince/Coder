@@ -1,0 +1,197 @@
+/* Body with animated gradient */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background: linear-gradient(270deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
+  background-size: 800% 800%;
+  animation: gradientMove 20s ease infinite;
+}
+
+
+/* Logo */
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 18px 0 10px;
+}
+.title img {
+  width: clamp(120px, 18vw, 200px);
+  height: clamp(120px, 18vw, 200px);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Team grid: single row desktop */
+.team-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  flex-wrap: nowrap; /* iisang row */
+  overflow: visible; /* walang scroll */
+}
+
+/* Quotes style */
+.quote {
+  font-style: italic;
+  font-family: 'Georgia', serif;
+  font-size: clamp(12px, 1.9vw, 15px);
+  color: #444;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Base card glass style */
+.profile-card {
+  flex: 1 1 0; /* pantay na hati ng space */
+  max-width: none;
+  background: rgba(255, 255, 255, 0.2); /* default glass */
+  background-clip: padding-box;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: clamp(12px, 2.2vw, 20px);
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  word-break: break-word;
+  scroll-snap-align: start;
+  border: 2px solid rgba(255, 255, 255, 0.3); /* default border */
+}
+.profile-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Per-card glass colors + glassy border */
+.profile-card:nth-child(1) {
+  background: rgba(224, 247, 250, 0.3);
+  border: 2px solid rgba(224, 247, 250, 0.6);
+}
+.profile-card:nth-child(2) {
+  background: rgba(187, 222, 251, 0.3);
+  border: 2px solid rgba(187, 222, 251, 0.6);
+}
+.profile-card:nth-child(3) {
+  background: rgba(252, 228, 236, 0.3);
+  border: 2px solid rgba(252, 228, 236, 0.6);
+}
+.profile-card:nth-child(4) {
+  background: rgba(178, 223, 219, 0.3);
+  border: 2px solid rgba(178, 223, 219, 0.6);
+}
+
+/* Profile image */
+.profile-img {
+  width: clamp(90px, 22vw, 160px);
+  height: clamp(90px, 22vw, 160px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  margin-bottom: 12px;
+}
+
+/* Typography */
+.profile-card h2 {
+  font-size: clamp(16px, 2.4vw, 22px);
+  margin: 6px 0 8px;
+}
+.profile-card p {
+  font-size: clamp(12px, 1.9vw, 16px);
+  line-height: 1.35;
+  margin: 4px 0;
+}
+
+/* MOBILE: stack vertical */
+@media (max-width: 480px) {
+  .title img {
+    width: 120px;
+    height: 120px;
+  }
+  .team-grid {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .profile-card {
+    flex: 1 1 auto;
+    max-width: 100%;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .profile-card {
+    transition: none;
+  }
+  .profile-card:hover {
+    transform: none;
+  }
+}
+
+/* BLUR kapag modal open */
+.blur {
+  filter: blur(6px);
+  transition: filter 0.3s ease;
+}
+
+/* Modal overlay */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Modal box - Glassmorphism */
+.modal-content {
+  background: rgba(255, 255, 255, 0.2);
+  background-clip: padding-box;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 16px;
+  text-align: center;
+  position: relative;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  animation: zoomIn 0.3s ease;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+    }
